@@ -2,17 +2,23 @@ import { useGlobalState } from "../hooks/GlobalState"
 import { useState } from "react"
 import { Box, FlatList, IconButton, Input, Text } from "native-base"
 import { Ionicons } from "@expo/vector-icons"
+import DeleteModal from "./DeleteModal"
 
 interface TaskItemProps {
     id: number
     title: string
 }
 
-
 function TaskItem({ id, title }: TaskItemProps) {
-    const { updateTask, deleteTask } = useGlobalState()
+    const { updateTask } = useGlobalState()
 
     const [updating, setUpdating] = useState(false)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    function handleModal() {
+        setIsModalOpen(!isModalOpen)
+    }
 
     const [newTitle, setNewTitle] = useState(title)
 
@@ -28,11 +34,15 @@ function TaskItem({ id, title }: TaskItemProps) {
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
-            bg="gray.200"
+            bg="#29292E"
+            borderWidth={2}
+            borderColor={"#27272A"}
+            borderRadius={8}
             p={4}
             my={2}
-            mx={2}
+            mx={5}
         >
+            <DeleteModal handleModal={handleModal} id={id} isModalOpen={isModalOpen}/>
             {updating ? (
                 <Input
                     flex={3}
@@ -40,19 +50,20 @@ function TaskItem({ id, title }: TaskItemProps) {
                     onChangeText={setNewTitle}
                 />
             ) : (
-                <Text flex={3}>{title}</Text>
+                <Text color={'#FFF'} flex={3}>{title}</Text>
             )}
+
             <IconButton
-                icon={<Ionicons name={updating ? "checkmark" : "pencil"} size={14} color="#402291" />}
+                icon={<Ionicons name={updating ? "checkmark" : "pencil"} size={14} color="#FFF" />}
                 colorScheme="light"
                 onPress={handleUpdate}
-                style={{ borderRadius: 50, backgroundColor: 'gold', marginLeft: 4 }}
+                style={{ borderRadius: 50, backgroundColor: '#FBA94C', marginLeft: 4 }}
             />
             <IconButton
-                icon={<Ionicons name="trash" size={14} color="#402291" />}
+                icon={<Ionicons name="trash" size={14} color="#FFF" />}
                 colorScheme="light"
-                onPress={() => deleteTask(id)}
-                style={{ borderRadius: 50, backgroundColor: 'red', marginLeft: 4 }}
+                onPress={() => handleModal()}
+                style={{ borderRadius: 50, backgroundColor: '#F75A68', marginLeft: 4 }}
             />
         </Box>
     )

@@ -8,7 +8,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <GlobalStateProvider>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#202024' }}>
           <RegisterTask />
           <TaskList />
         </View>

@@ -18,7 +18,7 @@ export default function RegisterTask() {
     }
 
     return (
-        <View style={{ backgroundColor: '#402291', paddingVertical: 20, paddingHorizontal: 20, paddingTop: 50 }}>
+        <View style={{ backgroundColor: '#121214', paddingVertical: 20, paddingHorizontal: 20, paddingTop: 50 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{ flex: 1, marginRight: 10 }}>
             <Input
@@ -27,14 +27,14 @@ export default function RegisterTask() {
               value={task}
               onChangeText={setTask}
               fontSize={14}
-              color="white"
+              color="#FFF"
             />
           </View>
           <IconButton
-            icon={<Ionicons name="add" size={24} color="#402291" />}
+            icon={<Ionicons name="add" size={24} color="#FFF" />}
             colorScheme="light"
             onPress={handleAddTask}
-            style={{ borderRadius: 50, backgroundColor: 'gold' }}
+            style={{ borderRadius: 50, backgroundColor: '#16A34A' }}
           />
         </View>
       </View>
